@@ -29,27 +29,25 @@ const Comments = () => {
   )
 
   return (
-    <div className='comments_wrapper'>
-      <List
-        className='comment-list'
-        header={`${comments.length} replies`}
-        itemLayout='horizontal'
-        dataSource={comments}
-        renderItem={(item) => (
-          <li>
-            <Comment
-              actions={actions}
-              author={item.name}
-              avatar={
-                'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-              }
-              content={item.body}
-              datetime={datetime}
-            />
-          </li>
-        )}
-      />
-    </div>
+    <List
+      className='comment-list'
+      header={`${comments.length} replies`}
+      itemLayout='horizontal'
+      dataSource={comments}
+      renderItem={(item) => (
+        <li>
+          <Comment
+            actions={actions}
+            author={item.name}
+            avatar={
+              'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+            }
+            content={item.body}
+            datetime={datetime}
+          />
+        </li>
+      )}
+    />
   )
 }
 

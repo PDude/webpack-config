@@ -1,0 +1,68 @@
+.container {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 0 15px;
+  width: 100%;
+}
+
+.layout {
+  display: grid;
+  grid-template-areas: 'sidebar nav' 'sidebar main';
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 200px 1fr;
+  position: relative;
+  .nav {
+    grid-area: nav;
+    border-bottom: 1px solid #f0f0f0;
+    background-image: url('../../images/tobias-rademacher-Sb406giSfBk-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 5;
+    padding: 20px;
+    img {
+      width: 60px;
+      display: block;
+      margin-left: auto;
+      filter: invert(1)
+    }
+    & * {
+      position: relative;
+      z-index: 15;
+    }
+    &::after {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      z-index: 10;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+  }
+  .sidebar {
+    grid-area: sidebar;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
+  .main {
+    grid-area: main;
+    padding-top: 40px;
+  }
+}
+
+iframe {
+  margin: 0 auto;
+  display: block;
+  height: 450px;
+  width: 100%;
+}
