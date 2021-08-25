@@ -1,13 +1,28 @@
 let mode = 'development'
-const path = require('path')
+let target = 'web'
 
-process.env.NODE_ENV === 'production' && (mode = 'production')
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+process.env.NODE_ENV === 'production' &&
+  (mode = 'production') &&
+  (target = 'browserslist')
 
 module.exports = {
   mode,
+  target,
 
   module: {
     rules: [
+      {
+        test: /\.(s[ac]|c)ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ]
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -18,8 +33,11 @@ module.exports = {
     ]
   },
 
+  plugins: [new MiniCssExtractPlugin()],
+
   devtool: 'source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist')
+    contentBase: path.resolve(__dirname, 'dist'),
+    hot: true
   }
 }
