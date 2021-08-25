@@ -1,18 +1,28 @@
+// @ts-nocheck
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 let mode = 'development'
 let target = 'web'
 
-process.env.NODE_ENV === 'production' &&
-  (mode = 'production') &&
-  (target = 'browserslist')
+const plugins = [
+  new CleanWebpackPlugin(),
+  new MiniCssExtractPlugin(),
+  new HtmlWebpackPlugin({ template: './src/index.html' })
+]
+
+process.env.NODE_ENV === 'production'
+  ? (mode = 'production') && (target = 'browserslist')
+  : plugins.push(new ReactRefreshWebpackPlugin())
 
 module.exports = {
   mode,
   target,
+
+  entry: './src/index.js',
 
   output: {
     filename: 'main.js',
@@ -60,11 +70,7 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({ template: './src/index.html' })
-  ],
+  plugins,
 
   resolve: {
     extensions: ['.js', '.jsx']
