@@ -14,9 +14,11 @@ const plugins = [
   new HtmlWebpackPlugin({ template: './src/index.html' })
 ]
 
-process.env.NODE_ENV === 'production'
-  ? (mode = 'production') && (target = 'browserslist')
-  : plugins.push(new ReactRefreshWebpackPlugin())
+process.env.NODE_ENV === 'production' &&
+  (mode = 'production') &&
+  (target = 'browserslist')
+
+process.env.SERVE && plugins.push(new ReactRefreshWebpackPlugin())
 
 module.exports = {
   mode,
